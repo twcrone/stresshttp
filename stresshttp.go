@@ -62,17 +62,8 @@ func readData() []string {
 
 func main() {
 	data := readData()
-
-	go submissions(1, data)
-	go submissions(2, data)
-	go submissions(3, data)
-	go submissions(4, data)
-	go submissions(5, data)
-	go submissions(6, data)
-	go submissions(7, data)
-	go submissions(8, data)
-	go submissions(9, data)
-	go submissions(0, data)
-
-	time.Sleep(10 * time.Second)
+	for i := 0; i < 100; i++ {
+		go submissions(i, data)
+	}
+	time.Sleep(10 * time.Minute)
 }
