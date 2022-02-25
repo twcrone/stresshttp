@@ -6,13 +6,18 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
+	"time"
 )
 
 func submissions(r int, data []string) {
-	for i, t := range data {
-		submission(t)
+	i := 0
+	for {
+		j := rand.Intn(len(data))
+		submission(data[j])
+		i++
 		message := fmt.Sprintf("Routine %d - %d", r, i)
 		if r == 0 {
 			message = "***" + message + "***"
@@ -67,5 +72,7 @@ func main() {
 	go submissions(7, data)
 	go submissions(8, data)
 	go submissions(9, data)
-	submissions(0, data)
+	go submissions(0, data)
+
+	time.Sleep(10 * time.Second)
 }
